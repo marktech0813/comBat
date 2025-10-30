@@ -1,7 +1,7 @@
-extends /templates/base-flat
+extends /templates/base-flat.jade
 
 block content
-  .style-flat(data-spy="scroll", data-target="#nav-container")
+  div(data-spy="scroll", data-target="#nav-container")
     .container-fluid#jumbotron
       .container
         .row
@@ -53,8 +53,8 @@ block content
         ul
           // Full time
           li
-            a(href="http://www.nickwinter.net" rel="external")
-              .profile-pic
+            .profile-pic
+              a(href="http://www.nickwinter.net" rel="external")
                 img(src="/images/pages/about/team-avatars/nick-avatar.png").img-thumbnail.avatar
                 img(src="/images/pages/about/team-headshots/nick-headshot.png").img-thumbnail.headshot
             .team-bio
@@ -64,8 +64,8 @@ block content
               br
 
           li
-            a(href="http://www.mattlott.com/" rel="external")
-              .profile-pic
+            .profile-pic
+              a(href="http://www.mattlott.com/" rel="external")
                 img(src="/images/pages/about/team-avatars/matt-avatar.png").img-thumbnail.avatar
                 img(src="/images/pages/about/team-headshots/matt-headshot.png").img-thumbnail.headshot
             .team-bio
@@ -76,16 +76,7 @@ block content
 
           li
             .profile-pic
-              img(src="/images/pages/about/team-avatars/maka-avatar.png").img-thumbnail.avatar
-              img(src="/images/pages/about/team-headshots/maka-headshot.png").img-thumbnail.headshot
-            .team-bio
-              h6.label.team-name Michael 'Maka' Gradin
-              small(data-i18n="about.maka_title")
-              br
-
-          li
-            a(href="http://robinyang.com/" rel="external")
-              .profile-pic
+              a(href="http://robinyang.com/" rel="external")
                 img(src="/images/pages/about/team-avatars/robin-avatar.png").img-thumbnail.avatar
                 img(src="/images/pages/about/team-headshots/robin-headshot.png").img-thumbnail.headshot
             .team-bio
@@ -96,20 +87,13 @@ block content
 
           li
             .profile-pic
-              img(src="/images/pages/about/team-avatars/nolan-avatar.png").img-thumbnail.avatar
-              img(src="/images/pages/about/team-headshots/nolan-headshot.png").img-thumbnail.headshot
+              a(href="http://bryukh.com" rel="external")
+                img(src="/images/pages/about/team-avatars/bryukh-avatar.png").img-thumbnail.avatar
+                img(src="/images/pages/about/team-headshots/bryukh-headshot.jpg").img-thumbnail.headshot
             .team-bio
-              h6.label.team-name Nolan Kelly
-              small(data-i18n="about.nolan_title")
-              br
-
-          li
-            .profile-pic
-              img(src="/images/pages/about/team-avatars/lisa-avatar.png").img-thumbnail.avatar
-              img(src="/images/pages/about/team-headshots/lisa-headshot.png").img-thumbnail.headshot
-            .team-bio
-              h6.label.team-name Lisa Wu
-              small(data-i18n="about.lisa_title")
+              h6.label.team-name
+                a(href="http://bryukh.com" rel="external") Valentin Bryukhanov
+              small(data-i18n="about.bryukh_title")
               br
 
           li
@@ -131,8 +115,8 @@ block content
               br
 
           li
-            a(href="https://www.linkedin.com/in/jane-park-90bb11b/" rel="external")
-              .profile-pic
+            .profile-pic
+              a(href="https://www.linkedin.com/in/jane-park-90bb11b/" rel="external")
                 img(src="/images/pages/about/team-avatars/jane-avatar.png").img-thumbnail.avatar
                 img(src="/images/pages/about/team-headshots/jane-headshot.png").img-thumbnail.headshot
             .team-bio
@@ -156,7 +140,7 @@ block content
               img(src="/images/pages/about/team-headshots/shubhangi-headshot.jpg").img-thumbnail.headshot
             .team-bio
               h6.label.team-name Shubhangi Gupta
-              small Software Engineer
+              small(data-i18n="about.shubhangi_title")
               br
 
           li
@@ -165,7 +149,7 @@ block content
               img(src="/images/pages/about/team-headshots/robarev-headshot.jpg").img-thumbnail.headshot
             .team-bio
               h6.label.team-name Rob Arevalo
-              small Partnership Manager
+              small(data-i18n="about.rob_title")
               br
 
           li
@@ -174,89 +158,153 @@ block content
               img(src="/images/pages/about/team-headshots/lawrence-headshot.jpg").img-thumbnail.headshot
             .team-bio
               h6.label.team-name Lawrence Kotovets
-              small Partnership Manager
+              small(data-i18n="about.lawrence_title")
               br
 
           li
             .profile-pic
-              img(src="/images/pages/about/team-avatars/vicki-avatar.png").img-thumbnail.avatar
-              img(src="/images/pages/about/team-headshots/vicki-headshot.jpg").img-thumbnail.headshot
-            .team-bio
-              h6.label.team-name Vicki Lang
-              small Director of Education
-              br
-
-          li
-            .profile-pic
-              img(src="/images/pages/about/team-headshots/chethana-headshot.png").img-thumbnail.avatar
-              img(src="/images/pages/about/team-headshots/chethana-headshot.png").img-thumbnail.headshot
-            .team-bio
-              h6.label.team-name Chethana Sastry
-              small Senior Software Engineer
-              br
-
-          li
-            a(href="https://www.linkedin.com/in/stephanie-rockett-phd-b63a0464/" rel="external")
-              .profile-pic
+              a(href="https://www.linkedin.com/in/stephanie-rockett-phd-b63a0464/" rel="external")
                 img(src="/images/pages/about/team-avatars/stephanie-avatar.png").img-thumbnail.avatar
                 img(src="/images/pages/about/team-headshots/stephanie-headshot.png").img-thumbnail.headshot
             .team-bio
               h6.label.team-name
                 a(href="https://www.linkedin.com/in/stephanie-rockett-phd-b63a0464/" rel="external") Stephanie Rockett
-              small Customer Support Specialist
+              small(data-i18n="about.stephanie_title")
               br
 
           li
-            a(href="https://andrewjakubowicz.github.io/" rel="external")
-              .profile-pic
+            .profile-pic
+              a(href="https://andrewjakubowicz.github.io/" rel="external")
                 img(src="/images/pages/about/team-avatars/andrew-avatar.png").img-thumbnail.avatar
                 img(src="/images/pages/about/team-headshots/andrew-headshot.png").img-thumbnail.headshot
             .team-bio
               h6.label.team-name
                 a(href="https://andrewjakubowicz.github.io/" rel="external") Andrew Jakubowicz
-              small Software Engineer
+              small(data-i18n="about.andrew_title")
               br
 
           li
-            a(href="http://www.magicalunderworld.com/" rel="external")
-              .profile-pic
+            .profile-pic
+              a(href="http://www.magicalunderworld.com/" rel="external")
                 img(src="/images/pages/about/team-avatars/brian-avatar.png").img-thumbnail.avatar
                 img(src="/images/pages/about/team-headshots/brian-headshot.png").img-thumbnail.headshot
             .team-bio
               h6.label.team-name
                 a(href="http://www.magicalunderworld.com/" rel="external") Brian Freyermuth
-              small Lead Game Designer
+              small(data-i18n="about.brian_title")
               br
 
           li
             .profile-pic
-              img(src="/images/pages/about/team-headshots/bobby-headshot.png").img-thumbnail.avatar
+              img(src="/images/pages/about/team-avatars/bobby-avatar.png").img-thumbnail.avatar
               img(src="/images/pages/about/team-headshots/bobby-headshot.png").img-thumbnail.headshot
             .team-bio
               h6.label.team-name Bobby Lockhart
-              small Game Designer
+              small(data-i18n="about.bobby_title")
               br
 
-        ul
-          // Part time / contract
           li
-            a(href="http://bryukh.com" rel="external")
-              img(src="/images/pages/about/bryukh_small.png").img-thumbnail
+            .profile-pic
+              img(src="/images/pages/about/team-avatars/claire-avatar.png").img-thumbnail.avatar
+              img(src="/images/pages/about/team-headshots/claire-headshot.jpg").img-thumbnail.headshot
             .team-bio
-              h6.label.team-name
-                a(href="http://bryukh.com" rel="external") Valentin Bryukhanov
-              small Gameplay Developer
+              h6.label.team-name Claire Armstrong
+              small(data-i18n="about.claire_title")
               br
 
           li
-            a(href="http://danielalao.com" rel="external")
-              img(src="/images/pages/about/daniela_small.png").img-thumbnail
+            .profile-pic
+              img(src="/images/pages/about/team-avatars/chelsea-avatar.png").img-thumbnail.avatar
+              img(src="/images/pages/about/team-headshots/chelsea-headshot.jpg").img-thumbnail.headshot
+            .team-bio
+              h6.label.team-name Chelsea Johnson
+              small(data-i18n="about.chelsea_title")
+              br
+
+          li
+            .profile-pic
+              img(src="/images/pages/about/team-avatars/daniela-avatar.png").img-thumbnail.avatar
+              img(src="/images/pages/about/team-headshots/daniela-headshot.jpg").img-thumbnail.headshot
             .team-bio
               h6.label.team-name
                 a(href="http://danielalao.com" rel="external") Daniela Lao
               small(data-i18n="about.daniela_title")
-              small(data-i18n="about.daniela_blurb")
+              br
 
+          li
+            .profile-pic
+              img(src="/images/pages/about/team-avatars/shasha-avatar.png").img-thumbnail.avatar
+              img(src="/images/pages/about/team-headshots/shasha-headshot.jpg").img-thumbnail.headshot
+            .team-bio
+              h6.label.team-name
+                a(href="http://www.shashaxdu.com/" rel="external") Shasha Du
+              small(data-i18n="about.shasha_title")
+              br
+
+          li
+            .profile-pic
+              img(src="/images/pages/about/team-avatars/bill-avatar.png").img-thumbnail.avatar
+              img(src="/images/pages/about/team-headshots/bill-headshot.jpg").img-thumbnail.headshot
+            .team-bio
+              h6.label.team-name Bill Wang
+              small(data-i18n="about.bill_title")
+              br
+
+          li
+            .profile-pic
+              img(src="/images/pages/about/team-avatars/maya-avatar.png").img-thumbnail.avatar
+              img(src="/images/pages/about/team-headshots/maya-headshot.jpg").img-thumbnail.headshot
+            .team-bio
+              h6.label.team-name Maya McCoy
+              small(data-i18n="about.maya_title")
+              br
+
+          li
+            .profile-pic
+              img(src="/images/pages/about/team-avatars/shan-avatar.png").img-thumbnail.avatar
+              img(src="/images/pages/about/team-headshots/shan-headshot.jpg").img-thumbnail.headshot
+            .team-bio
+              h6.label.team-name Shan Liu
+              small(data-i18n="about.shan_title")
+              br
+
+          li
+            .profile-pic
+              img(src="/images/pages/about/team-avatars/run-avatar.png").img-thumbnail.avatar
+              img(src="/images/pages/about/team-headshots/run-headshot.jpg").img-thumbnail.headshot
+            .team-bio
+              h6.label.team-name Run Chen
+              small(data-i18n="about.run_title")
+              br
+
+          li
+            .profile-pic
+              img(src="/images/pages/about/team-headshots/lance-headshot.png").img-thumbnail.avatar
+              img(src="/images/pages/about/team-headshots/lance-headshot.png").img-thumbnail.headshot
+            .team-bio
+              h6.label.team-name Lance Wu
+              small(data-i18n="about.lance_title")
+              br
+
+          li
+            .profile-pic
+              img(src="/images/pages/about/team-avatars/matias-avatar.png").img-thumbnail.avatar
+              img(src="/images/pages/about/team-headshots/matias-headshot.jpeg").img-thumbnail.headshot
+            .team-bio
+              h6.label.team-name Matias Forbord
+              small(data-i18n="about.matias_title")
+              br
+
+          li
+            .profile-pic
+              img(src="/images/pages/about/team-avatars/ryan-avatar.png").img-thumbnail.avatar
+              img(src="/images/pages/about/team-headshots/ryan-headshot.jpg").img-thumbnail.headshot
+            .team-bio
+              h6.label.team-name Ryan Bousquet
+              small(data-i18n="about.ryan_title")
+              br
+
+        ul
           li
             a(href="http://retrostylegames.com/" rel="external")
               img(src="/images/pages/about/pavel_small.png").img-thumbnail
@@ -367,35 +415,17 @@ block content
                 li.small(data-i18n="about.jobs_benefit_4")
                 li.small(data-i18n="about.jobs_benefit_5")
                 li.small(data-i18n="about.jobs_benefit_7")
-          .col-sm-6.col-md-5.col-lg-4
-            .job-listing
-               h5 China General Manager
-                 .text-center
-                   small.label
-                     | Beijing • Full-time
-                 p.small Lead CodeCombat’s expansion into China and build CodeCombat’s Chinese team from Beijing.
-                 p.small If you are an entrepreneurial leader passionate about the future of education in China, let’s work together to bring the best game-based coding education platform to the largest education market on the planet.
-                 a.job-link.btn.btn-lg.btn-navy(href="https://jobs.lever.co/codecombat/2e187363-7554-45cb-92aa-29f322296942?lever-origin=applied&lever-source%5B%5D=CodeCombat" rel="external")
-                  span(data-i18n="about.learn_more")
           .col-sm-6.col-md-5.col-md-offset-1.col-lg-4.col-lg-offset-0
             .job-listing
-               h5 Curriculum Developer
-                 .text-center
-                   small.label
-                     | San Francisco • Full-time
-                 p.small Create computer science instructional content for middle and high school students and teachers.
-                 p.small If you know how to teach, how to write, and how to code, then join a fast-paced, highly collaborative team of creative professionals on a mission to make a difference for kids.
-                 a.job-link.btn.btn-lg.btn-navy(href="https://jobs.lever.co/codecombat/dee46cce-35e9-4040-bf5b-014201482647?lever-origin=applied&lever-source%5B%5D=CodeCombat" rel="external")
+              h5 Software Engineer (China)
+                .text-center
+                  small.label
+                    | Beijing • Full-time
+                p.small Want to make a difference on a global scale?
+                p.small CodeCombat is looking for an experienced software engineer to support the education platform of the future.
+                a.job-link.btn.btn-lg.btn-navy(href="https://jobs.lever.co/codecombat/623b1bba-5686-4112-86ff-f99add32e8f3" rel="external" target="_blank")
                   span(data-i18n="about.learn_more")
-          .col-sm-6.col-md-5.col-lg-4
-            .job-listing
-               h5 Engineering Manager
-                 .text-center
-                   small.label
-                     | San Francisco • Full-time
-                 p.small Want to build a futuristic learning platform for computer science?  Come lead our engineering team and help take education to the next level!
-                 a.job-link.btn.btn-lg.btn-navy(href="https://jobs.lever.co/codecombat/38d91038-8417-4aa1-9936-77a082ffa050?lever-origin=applied&lever-source%5B%5D=CodeCombat" rel="external")
-                  span(data-i18n="about.learn_more")
+
           //.col-sm-6.col-md-5.col-lg-4
           //  .job-listing
           //    h5 (No Open Roles)

@@ -39,12 +39,19 @@ module.exports = class PlayGameDevLevelView extends RootView
     'click #play-more-codecombat-btn': 'onClickPlayMoreCodeCombatButton'
 
   initialize: (@options, @sessionID) ->
+    super(@options)
+
     @state = new State({
       loading: true
       progress: 0
       creatorString: ''
       isOwner: false
     })
+
+    $(window).keydown (event) ->
+      # prevent space from scrolling on the page since it can be used as a control in the game.
+      if (event.keyCode == 32 && event.target == document.body)
+        event.preventDefault()
 
     if utils.getQueryVariable 'dev'
       @supermodel.shouldSaveBackups = (model) ->  # Make sure to load possibly changed things from localStorage.
@@ -72,6 +79,11 @@ module.exports = class PlayGameDevLevelView extends RootView
 
     .then (levelLoader) =>
       { @level, @session, @world } = levelLoader
+
+      @setMeta({
+        title: $.i18n.t 'play.game_development_title', { level: @level.get('name') }
+      })
+
       @god.setLevel(@level.serialize {@supermodel, @session})
       @god.setWorldClassMap(@world.classMap)
       @goalManager = new GoalManager(@world, @level.get('goals'), @team)
@@ -145,6 +157,13 @@ module.exports = class PlayGameDevLevelView extends RootView
       throw e if e.stack
       @state.set('errorMessage', e.message)
 
+  getMeta: ->
+    return {
+      links: [
+        { vmid: 'rel-canonical', rel: 'canonical', href: '/play'}
+      ]
+    }
+
   onEditLevelButton: ->
     viewClass = 'views/play/level/PlayLevelView'
     route = "/play/level/#{@level.get('slug')}"
@@ -156,6 +175,7 @@ module.exports = class PlayGameDevLevelView extends RootView
     }
 
   onClickPlayButton: ->
+    $('#play-btn').blur()   # Removes focus from the button after clicking on it.
     worldCreationOptions = {spells: @spells, preload: false, realTime: true, justBegin: false, keyValueDb: @session.get('keyValueDb') ? {}, synchronous: true}
     @god.createWorld(worldCreationOptions)
     Backbone.Mediator.publish('playback:real-time-playback-started', {})
@@ -217,7 +237,7 @@ module.exports = class PlayGameDevLevelView extends RootView
     if @world.uiText?.levelName
       @levelName = @world.uiText.levelName
       @renderSelectors '#directions'
-  
+
   updateVictoryMessage: ->
     if @world.uiText?.victoryMessage
       @victoryMessage = @world.uiText?.victoryMessage
@@ -238,4 +258,5 @@ module.exports = class PlayGameDevLevelView extends RootView
     @goalManager?.destroy()
     @scriptManager?.destroy()
     delete window.world # not sure where this is set, but this is one way to clean it up
+    $(window).off("keydown")
     super()

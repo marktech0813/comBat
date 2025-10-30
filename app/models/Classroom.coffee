@@ -1,7 +1,10 @@
 CocoModel = require './CocoModel'
 schema = require 'schemas/models/classroom.schema'
 utils = require '../core/utils'
+{ findNextLevelsBySession, getLevelsDataByOriginals } = require 'ozaria/site/common/ozariaUtils'
+coursesHelper = require '../lib/coursesHelper'
 User = require 'models/User'
+Level = require 'models/Level'
 
 module.exports = class Classroom extends CocoModel
   @className: 'Classroom'
@@ -134,7 +137,8 @@ module.exports = class Classroom extends CocoModel
     playtime = 0
     levels = []
     linesOfCode = 0
-    lastLevelDone = false
+    userLevels = {}
+    levelsInCourse = new Set()
     for level, index in courseLevels.models
       levelsTotal++ unless level.get('practice') or level.get('assessment')
       complete = false
@@ -155,7 +159,8 @@ module.exports = class Classroom extends CocoModel
         assessment: level.get('assessment') ? false
         practice: level.get('practice') ? false
         complete: complete
-      lastLevelDone = complete unless level.get('practice') or level.get('assessment')
+      levelsInCourse.add(level.get('original')) unless level.get('practice') or level.get('assessment')
+      userLevels[level.get('original')] = complete
     lastPlayed = lastStarted ? lastPlayed
     lastPlayedNumber = '' if lastPlayed?.get('assessment')
     needsPractice = false
@@ -164,10 +169,17 @@ module.exports = class Classroom extends CocoModel
       currentLevel = courseLevels.models[currentIndex]
       currentPlaytime = levelSessionMap[currentLevel.get('original')]?.get('playtime') ? 0
       needsPractice = utils.needsPractice(currentPlaytime, currentLevel.get('practiceThresholdMinutes')) and not currentLevel.get('assessment')
-      nextIndex = utils.findNextLevel(levels, currentIndex, needsPractice)
-    nextLevel = courseLevels.models[nextIndex]
-    nextLevel = arena if levelsLeft is 0
-    nextLevel ?= _.find courseLevels.models, (level) -> not levelSessionMap[level.get('original')]?.get('state')?.complete
+      unless utils.ozariaCourseIDs.includes(courseID)
+        nextIndex = utils.findNextLevel(levels, currentIndex, needsPractice)
+    if utils.ozariaCourseIDs.includes(courseID)
+      # assuming that there will be only one next level in ozaria v1 for now
+      nextLevelOriginal = findNextLevelsBySession(sessions, courseLevels.models)[0]
+      nextLevel = new Level(getLevelsDataByOriginals(courseLevels.models, [nextLevelOriginal])[0])
+    else
+      nextLevel = courseLevels.models[nextIndex]
+      nextLevel = arena if levelsLeft is 0
+      nextLevel ?= _.find courseLevels.models, (level) -> not levelSessionMap[level.get('original')]?.get('state')?.complete
+    [_userStarted, courseComplete, _totalComplete] = coursesHelper.hasUserCompletedCourse(userLevels, levelsInCourse)
 
     stats =
       levels:
@@ -182,9 +194,9 @@ module.exports = class Classroom extends CocoModel
         first: courseLevels.first()
         arena: arena
         project: project
-        lastLevelDone: lastLevelDone
       playtime: playtime
       linesOfCode: linesOfCode
+      courseComplete: courseComplete
     stats
 
   fetchForCourseInstance: (courseInstanceID, options={}) ->
@@ -227,3 +239,5 @@ module.exports = class Classroom extends CocoModel
       return false unless course
       return _.any(course.levels, { assessment: true })
     _.any(@get('courses'), (course) -> _.any(course.levels, { assessment: true }))
+
+  isGoogleClassroom: -> @get('googleClassroomId')?.length > 0

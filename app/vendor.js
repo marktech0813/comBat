@@ -34,6 +34,7 @@ require('imports-loader?this=>window!npm-modernizr');
 
 window.Vue = require('vue/dist/vue.common.js') // TODO: Update to using just the runtime (need to precompile templates!)
 window.Vuex = require('vuex').default
+window.VuexORM = require('@vuex-orm/core').default
 
 window.algoliasearch = require('algoliasearch')
 
@@ -51,6 +52,25 @@ if (!String.prototype.includes) {
     }
   };
 }
+
+// Polyfill for `node.remove` method.
+// Reference: https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/remove
+// from:https://github.com/jserz/js_piece/blob/master/DOM/ChildNode/remove()/remove().md
+(function (arr) {
+  arr.forEach(function (item) {
+    if (item.hasOwnProperty('remove')) {
+      return
+    }
+    Object.defineProperty(item, 'remove', {
+      configurable: true,
+      enumerable: true,
+      writable: true,
+      value: function remove () {
+        this.parentNode.removeChild(this)
+      }
+    })
+  })
+})([Element.prototype, CharacterData.prototype, DocumentType.prototype])
 
 function loadScript (url) {
   var script = document.createElement('script');

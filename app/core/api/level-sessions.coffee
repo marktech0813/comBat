@@ -26,4 +26,15 @@ module.exports = {
       json: value
     }))
 
+  fetchForClassroomMembers: (classroomID, options) ->
+    fetchJson("/db/classroom/#{classroomID}/member-sessions", _.merge({}, options, {
+      method: 'GET'
+      remove: false
+    }))
+
+  update: (levelSession, options={}) ->
+    fetchJson("/db/level.session/#{levelSession._id}", _.assign({}, options, {
+      method: 'PUT'
+      json: levelSession
+    }))
 }

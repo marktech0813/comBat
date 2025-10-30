@@ -89,6 +89,7 @@ module.exports = {
   'views/ladder/LadderView': function () { return import(/* webpackChunkName: "ladder" */ 'views/ladder/LadderView') },
   'views/ladder/MainLadderView': function () { return import(/* webpackChunkName: "ladder" */ 'views/ladder/MainLadderView') },
   'views/play/level/PlayLevelView': function () { return import(/* webpackChunkName: "play" */ 'views/play/level/PlayLevelView') },
+  'views/play/level/PlayLevelVideoView': function () { return import(/* webpackChunkName: "play" */ 'views/play/level/PlayLevelVideoView') },
   'views/play/level/PlayGameDevLevelView': function () { return import(/* webpackChunkName: "play" */ 'views/play/level/PlayGameDevLevelView') },
   'views/play/level/PlayWebDevLevelView': function () { return import(/* webpackChunkName: "play" */ 'views/play/level/PlayWebDevLevelView') },
   'views/play/SpectateView': function () { return import(/* webpackChunkName: "play" */ 'views/play/SpectateView') },
@@ -101,6 +102,7 @@ module.exports = {
   'views/courses/ClassroomView': function () { return import(/* webpackChunkName: "courses" */ 'views/courses/ClassroomView') },
   'views/courses/CourseDetailsView': function () { return import(/* webpackChunkName: "courses" */ 'views/courses/CourseDetailsView') },
   'views/courses/TeacherClassesView': function () { return import(/* webpackChunkName: "courses" */ 'views/courses/TeacherClassesView') },
+  'views/courses/CourseVideosView': function () { return import(/* webpackChunkName: "courses" */ 'views/courses/CourseVideosView') },
   'views/teachers/TeacherStudentView': function () { return import(/* webpackChunkName: "teachers" */ 'views/teachers/TeacherStudentView') },
   'views/courses/TeacherClassView': function () { return import(/* webpackChunkName: "courses" */ 'views/courses/TeacherClassView') },
   'views/courses/TeacherCoursesView': function () { return import(/* webpackChunkName: "courses" */ 'views/courses/TeacherCoursesView') },
@@ -122,5 +124,19 @@ module.exports = {
   'views/teachers/RestrictedToTeachersView': function () { return import(/* webpackChunkName: "RestrictedToTeachersView" */ 'views/teachers/RestrictedToTeachersView') },
   'views/courses/RestrictedToStudentsView': function () { return import(/* webpackChunkName: "RestrictedToStudentsView" */ 'views/courses/RestrictedToStudentsView') },
   'views/user/CertificatesView': function () { return import(/* webpackChunkName: "CertificatesView" */ 'views/user/CertificatesView') },
-  'views/LicensorView': function() { return import(/* webpackChunkName: "LicensorView" */ 'views/LicensorView')}
+  'views/user/AnonCertificatesView': function () { return import(/* webpackChunkName: "CertificatesView" */ 'views/user/AnonCertificatesView') },
+  'views/LicensorView': function() { return import(/* webpackChunkName: "LicensorView" */ 'views/LicensorView')},
+
+  // All Vue app components will be loaded via a vue chunk.  Eventually we will integrate webpack loading with Vue and
+  // at that time we can remove this dynamic import and instead include SingletonAppVueComponentView in the main bundle
+  'views/core/SingletonAppVueComponentView': function () { return import(/* webpackChunkName: "vue" */ 'views/core/SingletonAppVueComponentView').then(m => m.default) },
+
+  // TODO: Why does chunk name `ozariaPlay` not work sporadically?
+  'views/ozaria/site/play/PageUnitMap': function() { return import(/*webpackChunkName: "ozariaPlay" */ 'ozaria/site/components/play/PageUnitMap') },
+  'views/ozaria/site/play/level/PlayLevelView': function () { return import(/* webpackChunkName: "ozariaPlay" */ 'ozaria/site/views/play/level/PlayLevelView') },
+  'views/cinematic': function() { return import(/* webpackChunkName: "ozariaPlay" */ 'ozaria/site/components/cinematic/PageCinematic') },
+  'views/interactive': function() { return import(/* webpackChunkName: "ozariaPlay" */ 'ozaria/site/components/interactive/PageInteractive') },
+
+  // Temporary
+  'views/courses/StudentRankingView': function() { return import(/* webpackChunkName: "StudentRankingView" */ 'views/courses/StudentRankingView')}
 }
